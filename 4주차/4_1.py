@@ -2,6 +2,8 @@ import random
 data = []
 i,k =0,0
 
+#2019038024 이동민
+
 for i in range(0,10):
     temp = hex(random.randrange(0,1000))
     data.append(temp)
