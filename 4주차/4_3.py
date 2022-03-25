@@ -1,37 +1,48 @@
 import turtle
 import random
 
-## 전역 변수 선언 부분 ##
-myTurtle, tX, tY, tColor, tSize, tShape = [None] * 6
-shapeList = []
-playerTurtles = []  # 거북 2차원 리스트
+myturtle, tx, ty, tcolor, tsize, tshape = [None] * 6
+shapelist = []
+playerturtles = []
 swidth, sheight = 500, 500
 
+#2019038024 이동민
+
 if __name__ == "__main__":
-    turtle.title('거북 리스트 활용')
+    turtle.title('거북이 리스트 활용 (정렬)')
     turtle.setup(width=swidth + 50, height=sheight + 50)
     turtle.screensize(swidth, sheight)
 
-    shape = turtle.Turtle('turtle')
-
     for i in range(0, 5):
-        myTurtle = turtle.Turtle('turtle')
 
-        tX = random.randrange(-80, 80)
-        tY = random.randrange(-80, 80)
-
-        r = random.random()
-        g = random.random()
+        myturtle = turtle.Turtle('turtle')
+        tx = random.randrange(-swidth / 2, swidth / 2)
+        ty = random.randrange(-sheight / 2, sheight / 2)
+        r = random.random();
+        g = random.random();
         b = random.random()
+        tsize = random.randrange(1, 100)/10
+        playerturtles.append([myturtle, tx, ty, tsize, r, g, b])
 
-        tSize = random.randrange(1, 100)/10
+    for i in range(0, len(playerturtles) - 1): #크기가 큰 거북이가 누굴지 저장
+        for k in range(i + 1, len(playerturtles)):
+            iVal = playerturtles[i][3]
+            kVal = playerturtles[k][3]
+            if iVal > kVal:
+                playerturtles[i], playerturtles[k] = playerturtles[k], playerturtles[i]
 
-        playerTurtles.append([myTurtle, tX, tY, tSize, r, g, b])
+    savex, savey = playerturtles[0][1], playerturtles[0][2] #위치 저장
 
-    for tList in playerTurtles:
-        myTurtle = tList[0]
-        myTurtle.color((tList[4], tList[5], tList[6]))
-        myTurtle.pencolor((tList[4], tList[5], tList[6]))
-        myTurtle.turtlesize(tList[3])
-        myTurtle.goto(tList[1], tList[2])
+    for tlist in playerturtles:
+        myturtle = tlist[0]
+        myturtle.penup()
+        myturtle.goto(savex, savey)
+        myturtle.color((tlist[4], tlist[5], tlist[6]))
+        myturtle.pencolor((tlist[4], tlist[5], tlist[6]))
+        myturtle.turtlesize(tlist[3])
+        myturtle.pendown()
+        myturtle.goto(tlist[1], tlist[2])
+        savex = tlist[1]
+        savey = tlist[2]
+
     turtle.done()
