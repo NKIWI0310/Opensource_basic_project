@@ -15,7 +15,7 @@ for tmpTup in trainTupleList:
     else:
         trainDic[tName] = tweight
 
-print('기차 수송량 목록 ==> ', trainTupleList)
+print('기차 수송량 목록==> ', trainTupleList)
 print('-----------------------------------')
 trainList = sorted(trainDic.items(), key=operator.itemgetter(1), reverse=True)
 
